@@ -2,9 +2,12 @@
   "name": "graphql-blog-api",
   "version": "0.0.1",
   "description": "GraphQL API using NodeJs, Express and MongoDB",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "start": "SET NODE_ENV=dev && node server.js",
+    "dev": "SET NODE_ENV=dev&& nodemon src/server.js --exec babel-node",
+    "build": "SET NODE_ENV=dev&& babel src -d dist",
+    "build:prod": "SET NODE_ENV=production&& babel src -d dist",
+    "server": "node dist/server.js",
     "test": "mocha"
   },
   "repository": {
@@ -26,9 +29,10 @@
     "mongoose": "^4.11.6"
   },
   "devDependencies": {
-    "babel-core": "^6.25.0",
+    "babel-cli": "^6.24.1",
     "babel-preset-env": "^1.6.0",
     "chai": "^4.1.1",
-    "mocha": "^3.5.0"
+    "mocha": "^3.5.0",
+    "nodemon": "^1.11.0"
   }
 }
