@@ -3,8 +3,8 @@ import {Types} from 'mongoose';
 
 import blogPostType from '../types/blog-post';
 import BlogPostModel from '../../models/blog-post-model';
-console.log('blogposttype')
-console.log(blogPostType)
+
+import getQueryFields from '../../utils/getQueryFields';
 
 let blogPost = {
     type: blogPostType,
@@ -14,10 +14,12 @@ let blogPost = {
             type: new GraphQLNonNull(GraphQLID)
         }
     },
-    resolve (root, params, options) {
+    resolve (root, params, context, info) {
+    let selection = getQueryFields(info);
 
     return BlogPostModel
       .findById(params.id)
+      .select(selection.join(' '))
       .exec();
     }
 }
