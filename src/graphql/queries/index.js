@@ -1,5 +1,5 @@
-import blogPost from './blog-post-queries';
+import { default as blogPostQueries} from './blog-post-queries';
 
 export default {
-  ...blogPost
+  ...blogPostQueries
 };

@@ -1,4 +1,4 @@
-import { GraphQLObjectType, GraphQLString, GraphQLNonNull, GraphQLID } from 'graphql';
+import { GraphQLObjectType, GraphQLString, GraphQLNonNull, GraphQLList, GraphQLID } from 'graphql';
 import {Types} from 'mongoose';
 
 import blogPostType from '../types/blog-post';
@@ -23,4 +23,17 @@ let blogPost = {
       .exec();
     }
 }
-export default { blogPost };
+
+let blogPosts = {
+    type: new GraphQLList(blogPostType),
+    args: {},
+    resolve (root, params, context, info) {
+    let selection = getQueryFields(info);
+
+    return BlogPostModel
+      .find({})
+      .select(selection.join(' '))
+      .exec();
+    }
+}
+export default { blogPost, blogPosts };

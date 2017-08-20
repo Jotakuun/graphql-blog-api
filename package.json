@@ -7,7 +7,7 @@
     "dev": "SET NODE_ENV=dev&& nodemon src/server.js --exec babel-node",
     "build": "SET NODE_ENV=dev&& babel src -d dist",
     "build:prod": "SET NODE_ENV=production&& babel src -d dist",
-    "server": "node dist/server.js",
+    "server": "npm run build&& node dist/server.js",
     "test": "mocha"
   },
   "repository": {
