@@ -1,7 +1,7 @@
 import { GraphQLObjectType, GraphQLString, GraphQLNonNull, GraphQLList, GraphQLID } from 'graphql';
 import {Types} from 'mongoose';
 
-import blogPostType from '../types/blog-post';
+import { blogPostType } from '../types/blog-post';
 import BlogPostModel from '../../models/blog-post-model';
 
 import getQueryFields from '../../utils/getQueryFields';
