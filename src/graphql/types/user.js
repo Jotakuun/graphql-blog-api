@@ -17,5 +17,15 @@ import {
           admin: { type: GraphQLBoolean }
       }
   });
+
+  const userInputType = new GraphQLInputObjectType({
+    name: 'userInput',
+    fields: {
+        username: { type: GraphQLString },
+        password: { type: GraphQLString },
+        email: { type: GraphQLString },
+        admin: { type: GraphQLBoolean }
+    }
+});
   
-  export {userType};
+  export {userType, userInputType};
