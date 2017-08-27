@@ -21,11 +21,13 @@
   },
   "homepage": "https://github.com/Jotakuun/graphql-blog-api#readme",
   "dependencies": {
+    "bcrypt": "~1.0.2",
     "body-parser": "^1.17.2",
     "config": "^1.26.2",
     "express": "^4.15.4",
     "express-graphql": "^0.6.7",
     "graphql": "^0.10.5",
+    "jsonwebtoken": "^7.4.3",
     "mongoose": "^4.11.6"
   },
   "devDependencies": {

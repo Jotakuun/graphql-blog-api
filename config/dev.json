@@ -1,3 +1,4 @@
 {
-	"DBHost": "mongodb://localhost:27017/dev-graphql-blog"
+	"DBHost": "mongodb://localhost:27017/dev-graphql-blog",
+	"API_SECRET": "secret_test"
 }

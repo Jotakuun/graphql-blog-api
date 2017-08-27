@@ -1,3 +1,4 @@
 {
-	"DBHost" : "PRODUCTION_DB_URI"
+	"DBHost" : "PRODUCTION_DB_URI",
+	"API_SECRET": "secret_test"
 }
