@@ -35,8 +35,7 @@ npm run server
 ```
 ``` bash
 
-# Register an user, returns any info of the created user
-# password is hashed in the returned object
+# Register an user, returns any info of the created user except password
 
 mutation {
   register(

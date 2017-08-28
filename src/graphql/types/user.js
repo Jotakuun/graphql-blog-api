@@ -12,7 +12,6 @@ import {
       fields: {
           _id: { type: new GraphQLNonNull(GraphQLID) },
           username: { type: GraphQLString },
-          password: { type: GraphQLString },
           email: { type: GraphQLString },
           admin: { type: GraphQLBoolean }
       }

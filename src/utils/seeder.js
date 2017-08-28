@@ -1,5 +1,6 @@
 import BlogPostModel from '../models/blog-post-model';
 import UserModel from '../models/user-model';
+import bcrypt from 'bcrypt';
 
 export default async function seeder() {
     const fakeData = [
@@ -31,10 +32,12 @@ export default async function seeder() {
         content: post.content
         });
     })
-    UserModel.create({
+    const user = {
         username: 'admin',
         email: 'admin@admin.com',
         password: 'admin',
         admin: true
-    });
+    }
+    user.password = await bcrypt.hash(user.password, 12);
+    UserModel.create(user);
 }
