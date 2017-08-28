@@ -8,9 +8,14 @@ import jwt from 'jsonwebtoken';
 import schema from './graphql';
 import BlogPostModel from './models/blog-post-model';
 
+import seeder from './utils/seeder';
+
 const API_SECRET = config.get('API_SECRET');
 const DBHost = config.get('DBHost')
 mongoose.connect(DBHost, { useMongoClient: true });
+
+// Run the seeder first time if you want to create fake data on the database
+// seeder();
 
 const app = express();
 
