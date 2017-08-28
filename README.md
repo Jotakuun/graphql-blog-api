@@ -21,3 +21,38 @@ npm run server
 
 - A MongoDB server (local or online)
 
+## Examples of queries
+
+``` bash
+## Get list of blog posts
+
+{
+  blogPosts {
+    _id
+    title
+  }
+}
+```
+``` bash
+
+# Register an user, returns any info of the created user
+# password is hashed in the returned object
+
+mutation {
+  register(
+    username: "admin",
+    email: "admin@email.com",
+    password: "admin1234")
+}
+
+
+# Login returns a web-token on successful request
+
+{
+  login(
+    username: "admin",
+    password: "admin1234"
+  )
+}
+
+```
