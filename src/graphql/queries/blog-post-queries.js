@@ -27,9 +27,9 @@ let blogPost = {
 let blogPosts = {
     type: new GraphQLList(blogPostType),
     args: {},
-    resolve (root, params, context, info) {
+    resolve (root, params, {user}, info) {
     let selection = getQueryFields(info);
-
+    
     return BlogPostModel
       .find({})
       .select(selection.join(' '))

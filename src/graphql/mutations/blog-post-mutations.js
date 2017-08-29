@@ -16,7 +16,7 @@ args: {
 },
 async resolve (root, params, {user}) {
     if(user.isAdmin) {
-        await BlogPostModel.create(params.data, (err, small) => {
+        await BlogPostModel.create({...params.data, author: user.id}, (err, small) => {
             if (err) throw new Error('Error creating a blog post');
           });
         return true;

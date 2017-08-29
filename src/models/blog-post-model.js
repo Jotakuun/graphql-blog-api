@@ -1,6 +1,10 @@
 import mongoose from 'mongoose';
 
 const blogPostSchema = new mongoose.Schema({
+    author: { 
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
     title: {
         type: String,
         required: true
