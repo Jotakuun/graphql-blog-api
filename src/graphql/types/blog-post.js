@@ -39,7 +39,10 @@ const blogPostType = new GraphQLObjectType({
 const blogPostInputType = new GraphQLInputObjectType({
     name: 'blogPostInput',
     fields: {
+        category: { type: GraphQLString },
+        type: { type: GraphQLString },
         title: { type: GraphQLString },
+        description: { type: GraphQLString },
         content: { type: GraphQLString }
     }
 });
