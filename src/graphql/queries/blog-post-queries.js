@@ -1,5 +1,5 @@
-import { GraphQLObjectType, GraphQLString, GraphQLNonNull, GraphQLList, GraphQLID } from 'graphql';
-import {Types} from 'mongoose';
+import { GraphQLNonNull, GraphQLList, GraphQLID } from 'graphql';
+import { Types } from 'mongoose';
 
 import { blogPostType } from '../types/blog-post';
 import BlogPostModel from '../../models/blog-post-model';
