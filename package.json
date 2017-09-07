@@ -8,7 +8,8 @@
     "build": "SET NODE_ENV=dev&& babel src -d dist",
     "build:prod": "SET NODE_ENV=production&& babel src -d dist",
     "server": "npm run build&& node dist/server.js",
-    "test": "mocha"
+    "test": "mocha",
+    "lint": "./node_modules/.bin/eslint src"
   },
   "repository": {
     "type": "git",
@@ -21,9 +22,13 @@
   },
   "homepage": "https://github.com/Jotakuun/graphql-blog-api#readme",
   "dependencies": {
+    "babel-eslint": "^7.2.3",
     "bcrypt": "~1.0.2",
     "body-parser": "^1.17.2",
     "config": "^1.26.2",
+    "eslint": "^4.6.1",
+    "eslint-config-defaults": "^9.0.0",
+    "eslint-plugin-react": "^7.3.0",
     "express": "^4.15.4",
     "express-graphql": "^0.6.7",
     "graphql": "^0.10.5",
@@ -36,6 +41,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.0",
     "chai": "^4.1.1",
+    "eslint-config-google": "^0.9.1",
     "mocha": "^3.5.0",
     "nodemon": "^1.11.0"
   }

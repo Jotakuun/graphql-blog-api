@@ -3,7 +3,7 @@ import { default as userQueries} from './user-queries';
 import { default as commentQueries} from './comment-queries';
 
 export default {
-  ...blogPostQueries,
-  ...userQueries,
-  ...commentQueries
+	...blogPostQueries,
+	...userQueries,
+	...commentQueries
 };

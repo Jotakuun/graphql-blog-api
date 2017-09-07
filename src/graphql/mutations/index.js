@@ -3,7 +3,7 @@ import { default as userMutations} from './user-mutations';
 import { default as commentMutations } from './comment-mutations';
 
 export default {
-  ...blogPostMutations,
-  ...userMutations,
-  ...commentMutations
+	...blogPostMutations,
+	...userMutations,
+	...commentMutations
 };
