@@ -22,12 +22,13 @@ let comment = {
 	async resolve (root, params, {user}) {
 		const isUserValid = await UserModel.findById(user.id);
 		if (isUserValid) {
-			await CommentModel.create({
+			return await CommentModel.create({
 				author: user.id,
 				blogPostId: params.blogPostId,
-				message: params.message}, (err, createdComment) => {
+				message: params.message,
+				likes: 0
+			}, (err) => {
 				if (err) throw new Error(err);
-				return createdComment;
 			});
 		} else {
 			throw new Error(`User doesn't exist`);

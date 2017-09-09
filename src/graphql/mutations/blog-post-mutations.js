@@ -8,7 +8,7 @@ import { blogPostType, blogPostInputType } from '../types/blog-post';
 import BlogPostModel from '../../models/blog-post-model';
 
 let createBlogPost = {
-	type: GraphQLBoolean,
+	type: blogPostType,
 	args: {
 		data: {
 			name: 'data',
@@ -17,10 +17,9 @@ let createBlogPost = {
 	},
 	async resolve (root, params, {user}) {
 		if (user.isAdmin) {
-			await BlogPostModel.create({...params.data, author: user.id}, (err) => {
+			return await BlogPostModel.create({...params.data, author: user.id}, (err) => {
 				if (err) throw new Error('Error creating a blog post');
 			});
-			return true;
 		} else {
 			throw new Error('User is not allowed for creating a post');
 		}
