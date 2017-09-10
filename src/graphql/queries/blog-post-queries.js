@@ -4,6 +4,7 @@ import { blogPostType } from '../types/blog-post';
 import BlogPostModel from '../../models/blog-post-model';
 
 import getQueryFields from '../../utils/getQueryFields';
+import paginationArgs from '../../utils/pagination';
 
 let blogPost = {
 	type: blogPostType,
@@ -15,7 +16,6 @@ let blogPost = {
 	},
 	resolve (root, params, context, info) {
 		let selection = getQueryFields(info);
-
 		return BlogPostModel
 			.findById(params.id)
 			.select(selection.join(' '))
@@ -25,12 +25,16 @@ let blogPost = {
 
 let blogPosts = {
 	type: new GraphQLList(blogPostType),
-	args: {},
+	args: paginationArgs,
 	resolve (root, params, context, info) {
 		let selection = getQueryFields(info);
+		const offset = params.offset ? params.offset : 0;
+		const limit = params.limit ? params.limit : 0;
     
 		return BlogPostModel
 			.find({})
+			.skip(offset)
+			.limit(limit)
 			.select(selection.join(' '))
 			.exec();
 	}

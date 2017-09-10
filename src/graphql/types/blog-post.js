@@ -3,13 +3,18 @@ import {
 	GraphQLInputObjectType,
 	GraphQLNonNull,
 	GraphQLString,
-	GraphQLID
+	GraphQLID,
+	GraphQLList,
+	GraphQLInt
 } from 'graphql';
 
-import {userType} from './user';
+import { userType } from './user';
 import UserModel from '../../models/user-model';
+import { commentType } from './comment';
+import CommentModel from '../../models/comment-model';
 
 import getQueryFields from '../../utils/getQueryFields';
+import paginationArgs from '../../utils/pagination';
 
 const blogPostType = new GraphQLObjectType({
 	name: 'blogPost',
@@ -32,7 +37,22 @@ const blogPostType = new GraphQLObjectType({
 		category: { type: GraphQLString },
 		title: { type: GraphQLString },
 		description: { type: GraphQLString },
-		content: { type: GraphQLString }
+		content: { type: GraphQLString },
+		comments: { 
+			type: new GraphQLList(commentType),
+			args: paginationArgs,
+			resolve: (blogPost, params, context, info) => {
+				let selection = getQueryFields(info);
+				const offset = params.offset ? params.offset : 0;
+				const limit = params.limit ? params.limit : 0;
+				return CommentModel
+					.find({blogPostId: blogPost._id})
+					.skip(offset)
+					.limit(limit)
+					.select(selection.join(' '))
+					.exec();
+			}
+		}
 	}
 });
 
