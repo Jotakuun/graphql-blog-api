@@ -36,4 +36,91 @@ let comment = {
 	}
 };
 
-export default { comment };
+let likeComment = {
+	type: commentType,
+	args: {
+		commentId: {
+			name: 'commentId',
+			type: new GraphQLNonNull(GraphQLString)
+		}
+	},
+	resolve (root, params, {user}) {
+		return new Promise( (resolve, reject ) => {
+			const isUserValid = UserModel.findById(user.id);
+			if (isUserValid) {
+				return CommentModel.findById(params.commentId, (err, comment) => {
+					if (err) reject(err);
+					comment.likes = comment.likes + 1;
+					comment.save((err, updated) => {
+						if (err) reject(err);
+						resolve(updated);
+					});
+				});
+			} else {
+				throw new Error(`User doesn't exist`);
+			}
+		});
+	}
+};
+
+let dislikeComment = {
+	type: commentType,
+	args: {
+		commentId: {
+			name: 'commentId',
+			type: new GraphQLNonNull(GraphQLString)
+		}
+	},
+	resolve (root, params, {user}) {
+		return new Promise( (resolve, reject ) => {
+			const isUserValid = UserModel.findById(user.id);
+			if (isUserValid) {
+				return CommentModel.findById(params.commentId, (err, comment) => {
+					if (err) reject(err);
+					comment.likes = comment.likes - 1;
+					comment.save((err, updated) => {
+						if (err) reject(err);
+						resolve(updated);
+					});
+				});
+			} else {
+				throw new Error(`User doesn't exist`);
+			}
+		});
+	}
+};
+
+let updateComment = {
+	type: commentType,
+	args: {
+		commentId: {
+			name: 'commentId',
+			type: new GraphQLNonNull(GraphQLString)
+		},
+		message: {
+			name: 'message',
+			type:new GraphQLNonNull(GraphQLString)
+		}
+	},
+	resolve (root, params, {user}) {
+		return new Promise( (resolve, reject ) => {
+			const loggedUser = UserModel.findById(user.id, (err, user) => user);
+			return CommentModel.findById(params.commentId, (err, comment) => {
+				if (err) reject(err);
+				// todo: check if loggedUser === comment.author too
+				if (user.isAdmin) {
+					comment.message = params.message;
+					comment.save((err, updated) => {
+						if (err) reject(err);
+						resolve(updated);
+					});
+				} else {
+					reject('User is not allowed for update this message');
+				}
+			});
+
+		});
+	}
+};
+
+export default { comment, likeComment, dislikeComment, updateComment };
