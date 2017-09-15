@@ -55,3 +55,4 @@ mutation {
 }
 
 ```
+You can see more example [here](examples.md)
